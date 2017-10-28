@@ -36,7 +36,13 @@ void setup() {
 
 void loop()
 {
-  set_sleep_mode( SLEEP_MODE_PWR_DOWN );
+  // SLEEP_MODE_IDLE
+// SLEEP_MODE_ADC
+// SLEEP_MODE_PWR_DOWN
+// SLEEP_MODE_PWR_SAVE
+// SLEEP_MODE_STANDBY
+// SLEEP_MODE_EXT_STANDBY
+  set_sleep_mode( SLEEP_MODE_PWR_DOWN);
   portENTER_CRITICAL();
 
   sleep_enable();
@@ -82,7 +88,7 @@ void TaskBlink(void *pvParameters)  // This is a task.
   {
     //LED_ON
     
-    //value=not value;
+    value=not value;
     digitalWrite(2,value);
     Serial.println("Led on");
     vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
