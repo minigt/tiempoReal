@@ -1,6 +1,8 @@
 #include <Arduino_FreeRTOS.h>
 #include <avr/sleep.h>  // include the Arduino (AVR) sleep functions.
 
+uint32_t value;
+
 // define two tasks for Blink & AnalogRead
 void TaskBlink( void *pvParameters );
 void TaskAnalogRead( void *pvParameters );
@@ -27,6 +29,9 @@ void setup() {
 
   // Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
    Serial.begin(1152000);
+   
+  pinMode(2,OUTPUT);
+  value=HIGH;
 }
 
 void loop()
@@ -75,8 +80,13 @@ void TaskBlink(void *pvParameters)  // This is a task.
 
   for (;;) // A Task shall never return or exit.
   {
+    //LED_ON
+    
+    //value=not value;
+    digitalWrite(2,value);
     Serial.println("Led on");
     vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
+    //LED_OFF
     Serial.println("Led off");
     vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
   }
